@@ -22,21 +22,19 @@
 3. 아래 명령어로 서버를 기동한다.
 
 ```shell
-./gradlew bootRun 
+java -jar ./build/libs/homework-0.0.1-SNAPSHOT.jar
 ```
 
-> 서버기동 후 H2콘솔 접속이 가능합니다.
-* [H2콘솔로 접속하기](http://localhost:8080/h2-console)
-<br/>
 
 ## 사용기술
 
 * Java 22
+* Gradle 8.8
 * Spring boot 3.3.2
-* Jpa
-* H2
-* Junit
-* Opencsv
+* Hibernate 6.5.2
+* H2 2.2.224
+* Junit 5
+* Opencsv 5.9
 <br/>
 
 ## 프로젝트 설계

@@ -25,10 +25,10 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'com.opencsv:opencsv:5.9'
+	implementation('com.opencsv:opencsv:5.9') {
+		exclude group: 'commons-logging', module: 'commons-logging'
+	}
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0'
-	implementation 'org.springframework.boot:spring-boot-starter-cache'
-	implementation 'com.github.ben-manes.caffeine:caffeine'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
@@ -39,4 +39,8 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+bootJar {
+	mainClass = 'kr.co._29cm.homework.HomeworkApplication'
 }

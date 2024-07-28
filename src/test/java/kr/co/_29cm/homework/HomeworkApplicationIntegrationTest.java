@@ -1,6 +1,7 @@
 package kr.co._29cm.homework;
 
 import kr.co._29cm.homework.domain.ItemDto;
+import kr.co._29cm.homework.domain.Order;
 import kr.co._29cm.homework.domain.OrderItemRequest;
 import kr.co._29cm.homework.exception.SoldOutException;
 import kr.co._29cm.homework.runner.ConsoleRunner;
@@ -68,7 +69,17 @@ class HomeworkApplicationIntegrationTest {
 
 	@Test
 	void 한번에_2개_이상의_상품을_요청하여_주문할_수_있다() {
+		//given
+		OrderItemRequest orderItemRequest = new OrderItemRequest();
+		orderItemRequest.add(Long.parseLong("123457"), Integer.parseInt("2"));
+		orderItemRequest.add(Long.parseLong("123458"), Integer.parseInt("5"));
+		itemService.createItems();
 
+		//when
+		Order order = orderService.order(orderItemRequest);
+
+		//then
+		assertThat(order.getOrderItems().size()).isEqualTo(2);
 	}
 
 }

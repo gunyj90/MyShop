@@ -6,13 +6,14 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import kr.co._29cm.homework.service.DataReader;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Component;
 
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,9 +46,10 @@ public class CsvDataReader implements DataReader {
                 .build();
 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(resourceLoader);
-        Resource[] resources = resolver.getResources(DIRECTORY + FILE_NAME);
+        InputStream inputStream = resolver.getResources(DIRECTORY + FILE_NAME)[0].getInputStream();
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
 
-        return new CSVReaderBuilder(resources.length > 0 ? new FileReader(resources[0].getFile()) : null)
+        return new CSVReaderBuilder(inputStreamReader)
                 .withSkipLines(1)
                 .withCSVParser(csvParser)
                 .build();

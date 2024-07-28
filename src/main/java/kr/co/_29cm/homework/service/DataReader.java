@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface DataReader {
 
-    String DIRECTORY = "/readable";
+    String DIRECTORY = "readable";
 
     <T> List<T> read(Parseable<T> parseable);
 
